@@ -34,9 +34,10 @@ jobs:
   
     - name: 'Configure Docker to use the gcloud command-line tool as a credential helper'
       run: | 
-        gcloud auth configure-docker --quiet
+        gcloud auth configure-docker us-docker.pkg.dev --quiet
 
-    - name: 'Build and push Docker image'
+    - name: 'Build and push Docker image to Google Artifact Registry'
       run: |
-        docker build . -t ${{ secrets.REGISTRY_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
-        docker push ${{ secrets.REGISTRY_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
+        docker build -t us.gcr.io/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker push us.gcr.io/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }}
+      
