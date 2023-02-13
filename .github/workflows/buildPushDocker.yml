@@ -23,21 +23,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     
-    - name: 'Authenticating to GCP' 
+    - id: 'auth'
+      name: 'Authenticating to GCP' 
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
+        token_format: 'access_token'
     
-    - name: 'Setup gcloud SDK'
-      uses: google-github-actions/setup-gcloud@v1
-  
-    - name: 'Configure Docker to use the gcloud command-line tool as a credential helper'
-      run: | 
-        gcloud auth configure-docker us-docker.pkg.dev --quiet
+    - name: 'setup docker login'
+      uses: 'docker/login-action@v2'
+      with:
+        registry: 'us-docker.pkg.dev'
+        username: 'oauth2accesstoken'
+        password: '${{ steps.auth.outputs.access_token }}'
+    
+    - name: 'login to ACR'
+      run: |-
+        echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://REGION-docker.pkg.dev
 
     - name: 'Build and push Docker image to Google Artifact Registry'
       run: |
         docker build -t us.gcr.io/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }} .
         docker push us.gcr.io/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }}
-      
