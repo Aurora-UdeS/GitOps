@@ -12,18 +12,11 @@ services:
       - ./nginx/map.conf:/etc/nginx/map.conf
     
   git-activity-fetcher:
-    image: ${REGISTRY_LOGIN_SERVER:-registryaurora.azurecr.io}/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
+    image: ${REGISTRY_SERVER:-us-docker.pkg.dev/aurora-377318/gcr.io}/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
     container_name: github-api-fetcher
     restart: always
     ports:
       - "3000:3000"
     environment:
       - GITHUB_ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN}
-
-  random-http-status:
-    image: solsson/httpstatus-random
-    container_name: random-http-status
-    restart: always
-    ports:
-      - "3001:8080"
     

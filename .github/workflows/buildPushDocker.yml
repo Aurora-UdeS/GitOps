@@ -3,16 +3,19 @@ name: docker_build_push_acr
 on:
   workflow_call:
     secrets:
-      REGISTRY_LOGIN_SERVER:
+      GCP_CREDENTIALS:
         required: true
-      REGISTRY_USERNAME:
+    inputs:
+      REGISTRY_SERVER:
+        description: 'Server of the registry to push to'
+        default: 'us-docker.pkg.dev/aurora-377318/gcr.io'
+        type: string
         required: true
-      REGISTRY_PASSWORD:
-        required: true
+    
  
 jobs:
   docker_build_push_acr:
-    name: 'Docker Build and Push to ACR'
+    name: 'Docker Build and Push to GCR'
     runs-on: ubuntu-latest
     environment: production
   
@@ -25,15 +28,20 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-  
-    - name: 'Docker Login'
-      uses: azure/docker-login@v1
+    
+    - name: 'Authenticating to GCP' 
+      uses: 'google-github-actions/auth@v1'
       with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
- 
-    - name: Build the frontend image and push it to ACR
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+    
+    - name: 'Setup gcloud SDK'
+      uses: google-github-actions/setup-gcloud@master
+  
+    - name: 'Configure Docker to use the gcloud command-line tool as a credential helper'
+      run: | 
+        gcloud auth configure-docker --quiet
+
+    - name: 'Build and push Docker image'
       run: |
-        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
+        docker build . -t ${{ secrets.REGISTRY_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_SERVER}}/${{ github.event.repository.name }}:${{ github.sha }}
