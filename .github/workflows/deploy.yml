@@ -5,8 +5,6 @@ on:
     secrets:
       GITOPS_PRIVATE_SSH_KEY:
         required: true
-      GCP_CREDENTIALS:
-        required: true
     inputs:
       SERVICE_NAME:
         description: 'Name of the service to deploy'

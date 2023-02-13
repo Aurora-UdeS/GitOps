@@ -3,12 +3,9 @@ name: docker_build_push_acr
 on:
   workflow_call:
     secrets:
-      GCP_CREDENTIALS:
-        required: true
       REGISTRY_SERVER:
         required: true
     
- 
 jobs:
   docker_build_push_acr:
     name: 'Docker Build and Push to GCR'
