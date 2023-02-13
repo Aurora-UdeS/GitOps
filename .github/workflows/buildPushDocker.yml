@@ -5,11 +5,7 @@ on:
     secrets:
       GCP_CREDENTIALS:
         required: true
-    inputs:
       REGISTRY_SERVER:
-        description: 'Server of the registry to push to'
-        default: 'us-docker.pkg.dev/aurora-377318/gcr.io'
-        type: string
         required: true
     
  
