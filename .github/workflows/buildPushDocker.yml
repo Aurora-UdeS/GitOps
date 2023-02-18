@@ -2,9 +2,6 @@ name: docker_build_push_acr
  
 on:
   workflow_call:
-    secrets:
-      REGISTRY_REPOSITORY:
-        required: true
     
 jobs:
   docker_build_push_acr:
@@ -19,12 +16,10 @@ jobs:
         shell: bash
   
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
+    - name: 'Checkout'
       uses: actions/checkout@v3
     
-    - id: 'auth'
-      name: 'Authenticating to GCP' 
+    - name: 'Authenticating to GCP' 
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
@@ -36,5 +31,5 @@ jobs:
 
     - name: 'Build and push Docker image to Google Artifact Registry'
       run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRY_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }} .
-        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRY_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }}
+        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
