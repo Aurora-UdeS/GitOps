@@ -29,7 +29,6 @@ jobs:
       with:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
-        token_format: 'access_token'
     
     - name: 'setup docker login'
       run: | 
@@ -37,5 +36,5 @@ jobs:
 
     - name: 'Build and push Docker image to Google Artifact Registry'
       run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRy_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }} .
-        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRy_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }}
+        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRY_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRY_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }}
