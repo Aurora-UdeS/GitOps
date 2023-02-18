@@ -3,7 +3,7 @@ name: docker_build_push_acr
 on:
   workflow_call:
     secrets:
-      REGISTRY_SERVER:
+      REGISTRY_REPOSITORY:
         required: true
     
 jobs:
@@ -32,17 +32,10 @@ jobs:
         token_format: 'access_token'
     
     - name: 'setup docker login'
-      uses: 'docker/login-action@v2'
-      with:
-        registry: 'us-docker.pkg.dev'
-        username: 'oauth2accesstoken'
-        password: '${{ steps.auth.outputs.access_token }}'
-    
-    - name: 'login to ACR'
-      run: |-
-        echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://northamerica-northeast1-docker.pkg.dev
+      run | 
+        gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
 
     - name: 'Build and push Docker image to Google Artifact Registry'
       run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }} .
-        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ github.event.repository.name }}:${{ github.sha }}
+        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRy_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/${{ secrets.REGISTRy_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }}
