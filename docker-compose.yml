@@ -41,9 +41,6 @@ services:
     restart: always
     ports:
       - "3001:3001"
-<<<<<<< HEAD
     environment:
       - DB_HOST=${DB_HOST}
     
-=======
->>>>>>> 9925e65f5e7a19a6389e362b49f453c1c063cbbb
