@@ -10,7 +10,20 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./nginx/map.conf:/etc/nginx/map.conf
-    
+
+  common_db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./postgres/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+    ports:
+      - "5432:5432"
+
   git-activity-fetcher:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
     container_name: github-api-fetcher
@@ -19,13 +32,18 @@ services:
       - "3000:3000"
     environment:
       - GITHUB_ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN}
-  
+
   expenses:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/expenses:${EXPENSES_TAG}
     container_name: expenses
+    depends_on:
+      - common_db
     restart: always
     ports:
       - "3001:3001"
+<<<<<<< HEAD
     environment:
       - DB_HOST=${DB_HOST}
     
+=======
+>>>>>>> 9925e65f5e7a19a6389e362b49f453c1c063cbbb
