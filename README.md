@@ -6,15 +6,11 @@ The repo [git activity fetcher](https://github.com/Aurora-UdeS/git-activity-fetc
 
 ### Add secrets to your repo
 secrets to add:
-* REGISTRY_LOGIN_SERVER -> found on the Azure portal
-* REGISTRY_USERNAME -> found on the Azure portal
-* REGISTRY_PASSWORD -> found on the Azure portal
-* SSH_PRIVATE_KEY -> email bela1003@usherbrooke.ca
 * GITOPS_SSH_PRIVATE_KEY -> email bela1003@usherbrooke.ca
 
 ### Add workflow yml to your repo
 ```yml
-name: << repo name >> pipeline
+name: '<< repo name >> pipeline'
 
 on:
   # execute pipeline at every push
@@ -24,18 +20,12 @@ jobs:
   # build docker image and push it on the registry
   build-push-docker:
     uses: Aurora-UdeS/GitOps/.github/workflows/buildPushDocker.yml@main
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
   # spins up the docker compose in the cloud VM
   deploy:
     if: github.ref_name == 'main'
     needs: build-push-docker
     uses: Aurora-UdeS/GitOps/.github/workflows/deploy.yml@main
-    permissions: write-all
     secrets:
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       GITOPS_PRIVATE_SSH_KEY: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
     with:
       # used to update the docker compose yml with the latest docker image tag
