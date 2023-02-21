@@ -28,8 +28,6 @@ services:
   git-activity-fetcher:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
     container_name: github-api-fetcher
-    depends_on:
-      - nginx
     restart: always
     ports:
       - "3000:3000"
@@ -41,7 +39,6 @@ services:
     container_name: expenses
     depends_on:
       - common_db
-      - nginx
     restart: always
     ports:
       - "3001:3001"
@@ -56,7 +53,6 @@ services:
   #   container_name: timesheets
   #   depends_on:
   #     - common_db
-  #     - nginx
   #   restart: always
   #   ports:
   #     - "3003:3003"
@@ -71,7 +67,6 @@ services:
     container_name: organization
     depends_on:
       - common_db
-      - nginx
     restart: always
     ports:
       - "3002:3002"
@@ -86,7 +81,6 @@ services:
   #   container_name: payments
   #   depends_on:
   #     - common_db
-  #     - nginx
   #   restart: always
   #   ports:
   #     - "3005:3005"
@@ -99,8 +93,6 @@ services:
   # adminsdk:
   #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
   #   container_name: adminsdk
-  #   depends_on:
-  #     - nginx
   #   restart: always
   #   ports:
   #     - "3004:3004"
