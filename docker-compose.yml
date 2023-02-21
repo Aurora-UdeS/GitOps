@@ -28,6 +28,8 @@ services:
   git-activity-fetcher:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
     container_name: github-api-fetcher
+    depends_on:
+      - nginx
     restart: always
     ports:
       - "3000:3000"
@@ -39,6 +41,7 @@ services:
     container_name: expenses
     depends_on:
       - common_db
+      - nginx
     restart: always
     ports:
       - "3001:3001"
@@ -47,12 +50,28 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+  
+  # timesheets:
+  #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheets:${TIMESHEETS_TAG}
+  #   container_name: timesheets
+  #   depends_on:
+  #     - common_db
+  #     - nginx
+  #   restart: always
+  #   ports:
+  #     - "3003:3003"
+  #   environment:
+  #     - DB_HOST=${DB_HOST}
+  #     - DB_PORT=${DB_PORT}
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASSWORD=${DB_PASSWORD}
     
   organization:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/organization:${ORGANIZATION_TAG}
     container_name: organization
     depends_on:
       - common_db
+      - nginx
     restart: always
     ports:
       - "3002:3002"
@@ -61,4 +80,28 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+
+  # payments:
+  #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
+  #   container_name: payments
+  #   depends_on:
+  #     - common_db
+  #     - nginx
+  #   restart: always
+  #   ports:
+  #     - "3005:3005"
+  #   environment:
+  #     - DB_HOST=${DB_HOST}
+  #     - DB_PORT=${DB_PORT}
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASSWORD=${DB_PASSWORD}
+  
+  # adminsdk:
+  #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
+  #   container_name: adminsdk
+  #   depends_on:
+  #     - nginx
+  #   restart: always
+  #   ports:
+  #     - "3004:3004"
     
