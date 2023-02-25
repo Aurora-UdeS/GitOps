@@ -1,0 +1,37 @@
+name: tests
+
+on:
+  workflow_call:
+    inputs:
+      SERVICE_NAME:
+        description: 'Name of the service to test'
+        default: ''
+        type: string
+        required: true
+
+jobs:
+  postman_tests:
+    name: 'Postman tests'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v3
+
+    - name: 'NodeJS setup'
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: 'Install newman'
+      run: |
+        npm install -g newman
+    
+    - name: 'Run Postman tests'
+      run: |
+        newman run ./postman/collections/${{ inputs.SERVICE_NAME }} API.json
