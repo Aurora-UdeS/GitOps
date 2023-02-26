@@ -35,7 +35,7 @@ services:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/expenses:${EXPENSES_TAG}
     container_name: expenses
     depends_on:
-      - common_db
+      - dockerized-db
     restart: always
     ports:
       - "3001:3001"
@@ -49,7 +49,7 @@ services:
   #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheets:${TIMESHEETS_TAG}
   #   container_name: timesheets
   #   depends_on:
-  #     - common_db
+  #     - dockerized-db
   #   restart: always
   #   ports:
   #     - "3003:3003"
@@ -63,7 +63,7 @@ services:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/organization:${ORGANIZATION_TAG}
     container_name: organization
     depends_on:
-      - common_db
+      - dockerized-db
     restart: always
     ports:
       - "3002:3002"
@@ -77,7 +77,7 @@ services:
   #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
   #   container_name: payments
   #   depends_on:
-  #     - common_db
+  #     - dockerized-db
   #   restart: always
   #   ports:
   #     - "3005:3005"
