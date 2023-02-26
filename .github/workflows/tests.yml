@@ -41,11 +41,6 @@ jobs:
     - name: 'Install newman'
       run: |
         npm install -g newman
-    
-    - name: 'build and run docker image'
-      run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
-        docker run -d --net host --rm --name ${{ github.event.repository.name }} northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
 
     - name: 'GCP Auth'
       if: ${{ inputs.NEEDS_DB }}
@@ -53,7 +48,7 @@ jobs:
       with:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
-    
+
     - name: 'setup docker login'
       if: ${{ inputs.NEEDS_DB }}
       run: | 
@@ -62,7 +57,12 @@ jobs:
     - name: 'Spin up postgres container'
       if: ${{ inputs.NEEDS_DB }}
       run: |
-        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db
+        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:604b0a440bbf5bd5390ada40ab3a9b014a72e5ff
+    
+    - name: 'build and run docker image'
+      run: |
+        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker run -d --net host --rm --name ${{ github.event.repository.name }} northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
     
     - name: 'Run Postman tests'
       run: |
