@@ -57,7 +57,7 @@ jobs:
     - name: 'Spin up postgres container'
       if: ${{ inputs.NEEDS_DB }}
       run: |
-        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db
+        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:375c38ca2e9d72abd821ce95b3738e5495cf0898
     
     - name: 'Run Postman tests'
       run: |
