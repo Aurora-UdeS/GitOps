@@ -32,9 +32,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: ${{ github.event.repository.name }}_${{ github.sha }}
-        path: /tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
+        path: .
 
     - name: 'Push Docker image to Google Artifact Registry'
       run: |
-        docker load -i /tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
+        docker load -i ${{ github.event.repository.name }}_${{ github.sha }}.tar
         docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
