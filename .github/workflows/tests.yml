@@ -49,7 +49,7 @@ jobs:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
 
-    - name: 'setup docker login'
+    - name: 'Setup docker login'
       if: ${{ inputs.NEEDS_DB }}
       run: | 
         gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
@@ -57,12 +57,18 @@ jobs:
     - name: 'Spin up postgres container'
       if: ${{ inputs.NEEDS_DB }}
       run: |
-        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:604b0a440bbf5bd5390ada40ab3a9b014a72e5ff
+        docker run -d --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:604b0a440bbf5bd5390ada40ab3a9b014a72e5ff
     
-    - name: 'build and run docker image'
+    - name: 'Download tested service docker image'
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ github.event.repository.name }}_${{ github.sha }}
+        path: .
+    
+    - name: 'Load docker image and start it'
       run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
-        docker run -d --net host --rm --name ${{ github.event.repository.name }} northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
+        docker load -i ${{ github.event.repository.name }}_${{ github.sha }}.tar
+        docker run -d --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
     
     - name: 'Run Postman tests'
       run: |
@@ -71,5 +77,5 @@ jobs:
     - name: 'Stop containers'
       if: always()
       run: |
-        docker stop postgres ${{ github.event.repository.name }}
+        docker stop $(docker ps -a -q)
     
