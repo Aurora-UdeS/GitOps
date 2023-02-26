@@ -11,17 +11,14 @@ services:
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./nginx/map.conf:/etc/nginx/map.conf
 
-  common_db:
-    image: postgres:15-alpine
-    container_name: postgres-db
+  dockerized-db:
+    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:${DOCKERIZED_DB_TAG}
+    container_name: postgres
     hostname: postgres-db
     restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - ./postgres/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
-      - ./postgres/data.sql:/docker-entrypoint-initdb.d/2-data.sql
     ports:
       - "${DB_PORT}:5432"
 

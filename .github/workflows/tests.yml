@@ -2,21 +2,31 @@ name: tests
 
 on:
   workflow_call:
+    secrets:
+      GITOPS_PRIVATE_SSH_KEY:
+        required: false
     inputs:
       SERVICE_NAME:
         description: 'Name of the service to test'
         default: ''
         type: string
         required: true
+      NEEDS_DB:
+        description: 'Does the service need a database?'
+        default: false
+        type: boolean
+        required: false
 
 jobs:
   postman_tests:
     name: 'Postman tests'
     runs-on: ubuntu-latest
-    environment: production
     defaults:
       run:
         shell: bash
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
     steps:
     - name: 'Checkout'
@@ -32,6 +42,29 @@ jobs:
       run: |
         npm install -g newman
     
+    - name: 'build and run docker image'
+      run: |
+        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker run -d --net host --rm --name ${{ github.event.repository.name }} northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
+
+    - name: 'GCP Auth'
+      if: ${{ inputs.NEEDS_DB }}
+      uses: google-github-actions/auth@v1
+      with:
+        workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+        service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
+    
+    - name: 'Spin up postgres container'
+      if: ${{ inputs.NEEDS_DB }}
+      run: |
+        docker run -d --name postgres --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db
+    
     - name: 'Run Postman tests'
       run: |
-        newman run ./postman/collections/${{ inputs.SERVICE_NAME }} API.json
+        newman run "postman/collections/${{ inputs.SERVICE_NAME }} API.json" 
+    
+    - name: 'Stop containers'
+      if: always()
+      run: |
+        docker stop postgres ${{ github.event.repository.name }}
+    
