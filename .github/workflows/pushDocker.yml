@@ -1,13 +1,12 @@
-name: docker_build_push_acr
+name: 'Push docker image to GCR'
  
 on:
   workflow_call:
     
 jobs:
-  docker_build_push_gcr:
-    name: 'Docker Build and Push to GCR'
+  push:
+    name: 'Push docker to GCR'
     runs-on: ubuntu-latest
-    environment: production
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -25,11 +24,17 @@ jobs:
         workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
     
-    - name: 'setup docker login'
+    - name: 'Setup docker login'
       run: | 
         gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
+    
+    - name: 'Download image as an artifact'
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ github.event.repository.name }}_${{ github.sha }}
+        path: .
 
-    - name: 'Build and push Docker image to Google Artifact Registry'
+    - name: 'Push Docker image to Google Artifact Registry'
       run: |
-        docker build -t northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }} .
+        docker load -i ${{ github.event.repository.name }}_${{ github.sha }}.tar
         docker push northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}

@@ -1,0 +1,27 @@
+name: 'build docker image and store it as an artifact'
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and export
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          tags: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
+          outputs: type=docker,dest=/tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}_${{ github.sha }}
+          path: /tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
