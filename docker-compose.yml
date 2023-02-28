@@ -94,5 +94,5 @@ services:
     ports:
       - "3004:3004"
     environment:
-      FIREBASE_CONFIG: ${FIREBASE_CONFIG}
+      - FIREBASE_CONFIG: ${FIREBASE_CONFIG}
     
