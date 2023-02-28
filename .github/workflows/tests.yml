@@ -72,7 +72,7 @@ jobs:
     
     - name: 'Run Postman tests'
       run: |
-        newman run "postman/collections/${{ inputs.SERVICE_NAME }} API.json" 
+        newman run "postman/collections/${{ inputs.SERVICE_NAME }}.json" 
     
     - name: 'Stop containers'
       if: always()
