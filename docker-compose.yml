@@ -72,6 +72,15 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+  
+  adminsdk:
+    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
+    container_name: adminsdk
+    restart: always
+    ports:
+      - "3004:3004"
+    environment:
+      - FIREBASE_CONFIG=${FIREBASE_CONFIG}
 
   # payments:
   #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
@@ -86,13 +95,4 @@ services:
   #     - DB_PORT=${DB_PORT}
   #     - DB_USER=${DB_USER}
   #     - DB_PASSWORD=${DB_PASSWORD}
-  
-  adminsdk:
-    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
-    container_name: adminsdk
-    restart: always
-    ports:
-      - "3004:3004"
-    environment:
-      - FIRBASE_CONFIG=${FIRBASE_CONFIG}
     
