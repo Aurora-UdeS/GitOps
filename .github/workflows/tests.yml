@@ -57,7 +57,7 @@ jobs:
     - name: 'Spin up postgres container'
       if: ${{ inputs.NEEDS_DB }}
       run: |
-        docker run -d --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:604b0a440bbf5bd5390ada40ab3a9b014a72e5ff
+        docker run -d --rm --net host northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:088c92709753871dc1b740577966e470d3d86487
     
     - name: 'Download tested service docker image'
       uses: actions/download-artifact@v3
