@@ -1,3 +1,9 @@
+[![Dockerized-db pipeline](https://github.com/Aurora-UdeS/dockerized-db/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/dockerized-db/actions/workflows/pipeline.yml)
+[![organization pipeline](https://github.com/Aurora-UdeS/organization/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/Aurora-UdeS/organization/actions/workflows/pipeline.yaml)
+[![expenses pipeline](https://github.com/Aurora-UdeS/expenses/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/Aurora-UdeS/expenses/actions/workflows/pipeline.yaml)
+[![timesheet pipeline](https://github.com/Aurora-UdeS/timesheet/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/Aurora-UdeS/timesheet/actions/workflows/pipeline.yaml)
+[![adminSDK pipeline](https://github.com/Aurora-UdeS/adminsdk/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/adminsdk/actions/workflows/pipeline.yml)
+[![git activity fetcher pipeline](https://github.com/Aurora-UdeS/git-activity-fetcher/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/git-activity-fetcher/actions/workflows/pipeline.yml)
 # GitOps
 This repo contains workflow and deployment related files.
 
