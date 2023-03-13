@@ -40,6 +40,11 @@ jobs:
       id-token: 'write'
 
     steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+        with:
+          repository: Aurora-UdeS/GitOps
+          ssh-key: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
       - name: GCP Auth
         uses: google-github-actions/auth@v1
         with:
@@ -50,5 +55,5 @@ jobs:
           gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
       - name: 'Deploy to Linux VM'
         run: |
-          gcloud compute ssh --zone "us-west4-b" "main" --command "cd ~/GitOps && git pull && docker compose up -d --build"
+          gcloud compute ssh --zone "us-west4-b" "main" --command "./deploy.sh"
   
