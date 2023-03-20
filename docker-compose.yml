@@ -82,9 +82,9 @@ services:
     ports:
       - "8010:8010"
     volumes:
-      - ./credentials.json:usr/src/app/credentials.json
+      - ./credentials.json:/usr/src/app/credentials.json
     environment:
-      - GOOGLE_APPLICATION_CREDENTIALS:/usr/src/app/credentials.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/credentials.json
 
   # payments:
   #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
