@@ -82,7 +82,7 @@ services:
     ports:
       - "8010:8010"
     volumes:
-      - credentials.json:usr/src/app/credentials.json
+      - ./credentials.json:usr/src/app/credentials.json
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/credentials.json
 
