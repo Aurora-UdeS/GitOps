@@ -47,9 +47,9 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
   
-  timesheets:
-    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheets:${TIMESHEETS_TAG}
-    container_name: timesheets
+  timesheet:
+    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheet:${TIMESHEET_TAG}
+    container_name: timesheet
     depends_on:
       - dockerized-db
     restart: always
