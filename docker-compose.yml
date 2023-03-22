@@ -86,17 +86,17 @@ services:
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/credentials.json
 
-  # payments:
-  #   image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
-  #   container_name: payments
-  #   depends_on:
-  #     - dockerized-db
-  #   restart: always
-  #   ports:
-  #     - "3005:3005"
-  #   environment:
-  #     - DB_HOST=${DB_HOST}
-  #     - DB_PORT=${DB_PORT}
-  #     - DB_USER=${DB_USER}
-  #     - DB_PASSWORD=${DB_PASSWORD}
+  payments:
+    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments:${PAYMENTS_TAG}
+    container_name: payments
+    depends_on:
+      - dockerized-db
+    restart: always
+    ports:
+      - "3005:3005"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     
