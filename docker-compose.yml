@@ -10,6 +10,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./nginx/map.conf:/etc/nginx/map.conf
+      - /etc/letsencrypt:/etc/letsencrypt
 
   dockerized-db:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/dockerized-db:${DOCKERIZED_DB_TAG}
