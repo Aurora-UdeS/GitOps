@@ -46,6 +46,7 @@ jobs:
 ```
 
 ## How to use docker compose
+These script are meant to be used where they are. Meaning you will need to open a terminal here to run them.
 ### pre-req
 #### gcloud sdk
 download the sdk from [here](https://cloud.google.com/sdk/docs/install)
