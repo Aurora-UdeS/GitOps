@@ -13,6 +13,12 @@ sed -i "s/GITHUB_CLIENT_SECRET=.*/GITHUB_CLIENT_SECRET=$(gcloud secrets versions
 echo -e "${G}fetch and insert postgres secret in env${NC}"
 sed -i "s/DB_USER=.*/DB_USER=$(gcloud secrets versions access 1 --secret=postgres_user)/" .env
 sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$(gcloud secrets versions access 1 --secret=postgres_password)/" .env
+echo -e "${G}setup NGINX port${NC}"
+if [ "$1" = "dev" ]; then
+    sed -i "s/NGINX_PORT=.*/NGINX_PORT=80/" .env
+elif [ "$1" = "local" ]; then
+    sed -i "s/NGINX_PORT=.*/NGINX_PORT=5174/" .env
+fi
 echo -e "${G}stopping docker compose${NC}"
 docker compose down
 echo -e "${G}deploying new docker compose version${NC}"

@@ -55,5 +55,5 @@ jobs:
           gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
       - name: 'Deploy to Linux VM'
         run: |
-          gcloud compute ssh --zone "us-west4-b" "main" --command "cd ~/GitOps && ./deploy.sh" -- -t
+          gcloud compute ssh --zone "us-west4-b" "main" --command "cd ~/GitOps && ./deploy.sh dev" -- -t
   
