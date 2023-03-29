@@ -65,3 +65,5 @@ Last step is to spin up the docker compose.
 ```bash
 ./deploy.sh local
 ```
+To use a specific version of a microservice, you will need to change the commit SHA located in the .env file.
+Each microservice has the latest commit SHA specified in the .env with <<REPO_NAME>>_TAG=<<COMMIT_SHA>>.
