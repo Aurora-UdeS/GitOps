@@ -55,6 +55,7 @@ If you're on Windows, make sure to restart your computer after installing the sd
 This script will setup your environment to be able to use the docker compose.  
 If you are using a Windows machine, you will need to run the script in a WSL terminal or a GitBash terminal.
 It will ask you to connect to your google account. You will need to select to one used on google cloud platform.
+PLEASE ACCEPT ALL PROMPTS
 ```bash
 ./setup.sh
 ```
