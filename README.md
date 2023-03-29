@@ -11,8 +11,14 @@ This repo contains workflow and deployment related files.
 The repo [git activity fetcher](https://github.com/Aurora-UdeS/git-activity-fetcher) should be used as an implementation reference.
 
 ### Add secrets to your repo
-secrets to add:
-* GITOPS_SSH_PRIVATE_KEY -> email bela1003@usherbrooke.ca
+- `GITOPS_PRIVATE_SSH_KEY` : private ssh key used to clone the repo
+This can be done by accessing the secret stored in google cloud secret manager.
+#### How to access google cloud secret manager using the gcloud sdk
+```bash
+gcloud secrets versions access 2 --secret=gitops-ssh-secret-key
+```
+#### How to access google cloud secret manager using the web console
+- Go to [google cloud secret manager](https://console.cloud.google.com/security/secret-manager)
 
 ### Add workflow yml to your repo
 ```yml
@@ -43,13 +49,17 @@ jobs:
 ### pre-req
 #### gcloud sdk
 download the sdk from [here](https://cloud.google.com/sdk/docs/install)
+If you're on Windows, make sure to restart your computer after installing the sdk.
 ### setup environment
+This script will setup your environment to be able to use the docker compose.  
+If you are using a Windows machine, you will need to run the script in a WSL terminal or a GitBash terminal.
+It will ask you to connect to your google account. You will need to select to one used on google cloud platform.
 ```bash
 ./setup.sh
 ```
 
 ### lauch docker compose locally
-Last step is to spin up the docker compose
+Last step is to spin up the docker compose.  
 ```bash
 ./deploy.sh local
 ```
