@@ -11,8 +11,8 @@ echo -e "${G}fetch and insert github client id/secret in env${NC}"
 sed -i "s/GITHUB_CLIENT_ID=.*/GITHUB_CLIENT_ID=$(gcloud secrets versions access 1 --secret="github_client_id")/" .env
 sed -i "s/GITHUB_CLIENT_SECRET=.*/GITHUB_CLIENT_SECRET=$(gcloud secrets versions access 1 --secret="github_client_secret")/" .env
 echo -e "${G}fetch and insert postgres secret in env${NC}"
-sed -i "s/POSTGRES_USER=.*/POSTGRES_USER=$(gcloud secrets versions access 1 --secret="postgres_user")/" .env
-sed -i "s/POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$(gcloud secrets versions access 1 --secret="postgres_password")/" .env
+sed -i "s/DB_USER=.*/DB_USER=$(gcloud secrets versions access 1 --secret="postgres_user")/" .env
+sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$(gcloud secrets versions access 1 --secret="postgres_password")/" .env
 echo -e "${G}stopping docker compose${NC}"
 docker compose down
 echo -e "${G}deploying new docker compose version${NC}"
