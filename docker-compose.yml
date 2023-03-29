@@ -41,6 +41,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - CORS_WHITELIST=${CORS_WHITELIST}
 
   expenses:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/expenses:${EXPENSES_TAG}
@@ -55,7 +56,8 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - ORGANIZATION_HOST=http://organization:3002/organization/
+      - ORGANIZATION_HOST={ORGANIZATION_HOST}
+      - CORS_WHITELIST=${CORS_WHITELIST}
   
   timesheet:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheet:${TIMESHEET_TAG}
@@ -70,6 +72,7 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - CORS_WHITELIST=${CORS_WHITELIST}
     
   organization:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/organization:${ORGANIZATION_TAG}
@@ -85,6 +88,7 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - CORS_WHITELIST=${CORS_WHITELIST}
   
   adminsdk:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
@@ -110,4 +114,5 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - CORS_WHITELIST=${CORS_WHITELIST}
     
