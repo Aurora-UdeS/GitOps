@@ -40,6 +40,9 @@ jobs:
 ```
 
 ## How to use docker compose
+### pre-req
+#### gcloud sdk
+download the sdk from [here](https://cloud.google.com/sdk/docs/install)
 ### setup environment
 ```bash
 ./setup.sh
