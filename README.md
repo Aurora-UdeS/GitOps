@@ -65,5 +65,10 @@ Last step is to spin up the docker compose.
 ```bash
 ./deploy.sh local
 ```
-To use a specific version of a microservice, you will need to change the commit SHA located in the .env file.
-Each microservice has the latest commit SHA specified in the .env with <<REPO_NAME>>_TAG=<<COMMIT_SHA>>.
+
+### How to specify a service version
+The services versions are set in the .env file. Normally, the default version is set to the latest in main, but you can manually change it. To do so, you will need the commit SHA of the specific version you want to use. When you have the commit SHA, change the value in the .env
+```bash
+<<REPO_NAME>>_TAG=<<NEW_COMMIT_SHA>>`
+```
+***IMPORTANT: the version you want to use has to be built and uploaded to the google artifactory. In order to built and pushed, the pipeline has to run successfully, which mean your git branch has to be pushed.
