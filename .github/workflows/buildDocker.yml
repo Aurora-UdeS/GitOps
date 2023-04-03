@@ -28,6 +28,12 @@ jobs:
         with:
           path: ${{ github.event.repository.name }}
 
+      - name: test
+        run: |
+          els .
+          ls GitOps
+          ls ${{ github.event.repository.name }} 
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
