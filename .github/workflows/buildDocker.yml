@@ -37,7 +37,7 @@ jobs:
         with:
           file: GitOps/${{ inputs.SERVICE_LANGUAGE }}/Dockerfile
           context: .
-          build-context: service=service,gitops=GitOps
+          build-contexts: service=service,gitops=GitOps
           tags: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
           outputs: type=docker,dest=/tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
 
