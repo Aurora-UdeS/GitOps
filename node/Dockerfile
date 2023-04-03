@@ -1,6 +1,6 @@
 FROM node:16 AS build
 WORKDIR /usr/src
-COPY --from=GitOps node .
+COPY --from=gitops node .
 COPY --from=service . .
 RUN npm install --only=production
 RUN npm i -g pkg
