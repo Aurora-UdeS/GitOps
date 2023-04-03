@@ -30,7 +30,7 @@ jobs:
 
       - name: test
         run: |
-          els .
+          ls .
           ls GitOps
           ls ${{ github.event.repository.name }} 
 
