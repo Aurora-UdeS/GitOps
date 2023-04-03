@@ -22,7 +22,7 @@ jobs:
           path: GitOps
           repository: Aurora-UdeS/GitOps
           ssh-key: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
-          branch: adam/change_node_dockerbuild
+          ref: adam/change_node_dockerbuild
 
       - name: Checkout Service
         uses: actions/checkout@v3
