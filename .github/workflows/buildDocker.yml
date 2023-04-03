@@ -24,9 +24,6 @@ jobs:
           ssh-key: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
           ref: adam/change_node_dockerbuild
 
-      - name: test
-        run: ls gitops/node
-
       - name: Checkout Service
         uses: actions/checkout@v3
         with:
