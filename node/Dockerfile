@@ -1,6 +1,6 @@
 FROM node:16 AS build
 WORKDIR /usr/src
-COPY --from=gitops node/node_esbuild.js .
+COPY --from=gitops node_esbuild.js .
 RUN cat node_esbuild.js
 COPY --from=service . .
 RUN npm install --only=production
