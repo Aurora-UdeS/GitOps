@@ -1,6 +1,7 @@
 FROM node:16 AS build
 WORKDIR /usr/src
-COPY . .
+COPY --from=GitOps node .
+COPY --from=service . .
 RUN npm install --only=production
 RUN npm i -g pkg
 RUN npm i esbuild
