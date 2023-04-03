@@ -2,13 +2,32 @@ name: 'build docker image and store it as an artifact'
 
 on:
   workflow_call:
+    inputs:
+      SERVICE_LANGUAGE:
+        description: 'Programming language of the service'
+        required: true
+        type: string
+    secrets:
+      GITOPS_PRIVATE_SSH_KEY:
+        description: 'SSH key to access GitOps repository'
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Gitops
         uses: actions/checkout@v3
+        with:
+          path: gitops
+          repository: Aurora-UdeS/GitOps
+          ssh-key: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
+          ref: adam/change_node_dockerbuild
+
+      - name: Checkout Service
+        uses: actions/checkout@v3
+        with:
+          path: service
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -16,7 +35,11 @@ jobs:
       - name: Build and export
         uses: docker/build-push-action@v4
         with:
+          file: gitops/${{ inputs.SERVICE_LANGUAGE }}/Dockerfile
           context: .
+          build-contexts: |
+            service=service
+            gitops=gitops/${{ inputs.SERVICE_LANGUAGE }}
           tags: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
           outputs: type=docker,dest=/tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
 
