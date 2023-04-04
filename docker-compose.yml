@@ -19,7 +19,7 @@ services:
     hostname: postgres-db
     restart: always
     environment:
-      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "${DB_PORT}:5432"
@@ -37,8 +37,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER}_git
+      - DB_PASSWORD=postgres
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
       - CORS_WHITELIST=${CORS_WHITELIST}
@@ -54,8 +54,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER}_expenses
+      - DB_PASSWORD=postgres
       - ORGANIZATION_HOST={ORGANIZATION_HOST}
       - CORS_WHITELIST=${CORS_WHITELIST}
   
@@ -70,8 +70,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER}_timesheet
+      - DB_PASSWORD=postgres
       - CORS_WHITELIST=${CORS_WHITELIST}
     
   organization:
@@ -86,8 +86,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER}_organization
+      - DB_PASSWORD=postgres
       - CORS_WHITELIST=${CORS_WHITELIST}
   
   adminsdk:
@@ -111,9 +111,5 @@ services:
     ports:
       - "3005:3005"
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
       - CORS_WHITELIST=${CORS_WHITELIST}
     
