@@ -1,8 +1,7 @@
 FROM golang:1.17-alpine AS build
 WORKDIR /usr/src/app
-COPY go.mod ./
+COPY --from=service . .
 RUN go mod download
-COPY . .
 RUN go build -o adminsdk cmd/adminsdk/main.go 
 
 FROM alpine as runtime
