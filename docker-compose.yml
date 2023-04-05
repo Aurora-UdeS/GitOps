@@ -20,7 +20,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_PASSWORD=${DB_SUPERUSER_PASSWORD}
     ports:
       - "${DB_PORT}:5432"
     # volumes:
@@ -39,7 +39,7 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}_git
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD={DB_PASSWORD}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
       - CORS_WHITELIST=${CORS_WHITELIST}
@@ -57,7 +57,7 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}_expenses
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD={DB_PASSWORD}
       - ORGANIZATION_HOST={ORGANIZATION_HOST}
       - TIMESHEET_HOST=${TIMESHEET_HOST}
       - CORS_WHITELIST=${CORS_WHITELIST}
@@ -75,7 +75,7 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}_timesheet
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD={DB_PASSWORD}
       - CORS_WHITELIST=${CORS_WHITELIST}
       - ORGANIZATION_HOST=${ORGANIZATION_HOST}
       - EXPENSES_HOST=${EXPENSES_HOST}
@@ -93,7 +93,7 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}_organization
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD={DB_PASSWORD}
       - CORS_WHITELIST=${CORS_WHITELIST}
       - TIMESHEET_HOST=${TIMESHEET_HOST}
       - EXPENSES_HOST=${EXPENSES_HOST}
