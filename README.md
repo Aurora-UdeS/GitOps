@@ -4,6 +4,7 @@
 [![timesheet pipeline](https://github.com/Aurora-UdeS/timesheet/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/timesheet/actions/workflows/pipeline.yml)
 [![adminSDK pipeline](https://github.com/Aurora-UdeS/adminsdk/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/adminsdk/actions/workflows/pipeline.yml)
 [![git activity fetcher pipeline](https://github.com/Aurora-UdeS/git-activity-fetcher/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Aurora-UdeS/git-activity-fetcher/actions/workflows/pipeline.yml)
+[![Remove old artifacts](https://github.com/Aurora-UdeS/aurora-app/actions/workflows/remove_old_artifact.yml/badge.svg)](https://github.com/Aurora-UdeS/aurora-app/actions/workflows/remove_old_artifact.yml)
 # GitOps
 This repo contains workflow and deployment related files.
 
