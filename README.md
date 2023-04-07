@@ -16,7 +16,7 @@ The repo [git activity fetcher](https://github.com/Aurora-UdeS/git-activity-fetc
 This can be done by accessing the secret stored in google cloud secret manager.
 #### How to access google cloud secret manager using the gcloud sdk
 ```bash
-gcloud secrets versions access 2 --secret=gitops-ssh-secret-key
+gcloud secrets versions access 1 --secret=gitops-ssh-secret-key
 ```
 #### How to access google cloud secret manager using the web console
 - Go to [google cloud secret manager](https://console.cloud.google.com/security/secret-manager)
