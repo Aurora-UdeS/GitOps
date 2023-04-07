@@ -120,4 +120,14 @@ services:
       - "3005:3005"
     environment:
       - CORS_WHITELIST=${CORS_WHITELIST}
+
+  conversion:
+    image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/conversion:${CONVERSION_TAG}
+    container_name: conversion
+    restart: always
+    ports:
+      - "3006:3006"
+    environment:
+      - CORS_WHITELIST=${CORS_WHITELIST}
+      - COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY}
     
