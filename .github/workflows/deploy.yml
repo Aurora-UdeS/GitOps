@@ -29,7 +29,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Updated container tag to ${{ github.sha }}"
+          git commit --allow-empty -m "Updated container tag to ${{ github.sha }}"
           git push
   deploy_to_linux_vm:
     name: 'Deploy to linux vm'
