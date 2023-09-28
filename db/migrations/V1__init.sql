@@ -183,17 +183,17 @@ VALUES
 ('0dd2c23a-980f-11ed-a8fc-0242ac120002', 4, 'EOS Nation inc'),
 ('0dd2c38e-980f-11ed-a8fc-0242ac120002', 4, '11066196 Canada inc'),
 ('0dd2c4e2-980f-11ed-a8fc-0242ac120002', 4, 'EOS Network Foundation');
-INSERT INTO employee ( id, email, first_name, last_name, reports_to, start_date )
+INSERT INTO employee ( id, email, first_name, last_name, reports_to, start_date, address, phone )
 VALUES
-('KU6LhC51L1XNulT52E6jaepsseI2', 'marieeve.castonguay@gmail.com', 'Marie-Eve', 'Castonguay', 'KU6LhC51L1XNulT52E6jaepsseI2', '2023-01-01'),
-('JAbUfiAVbuOOKZXUbJ2yqYzsdoN2', 'antoinelaberge16@gmail.com', 'Antoine', 'Laberge', 'JAbUfiAVbuOOKZXUbJ2yqYzsdoN2', '2023-01-01'),
-('LJQN6QBTWOYz83FC1HgNyi6KYBK2', 'adambeliveau16@gmail.com', 'Adam', 'Beliveau', 'LJQN6QBTWOYz83FC1HgNyi6KYBK2', '2023-01-01'),
-('1Y0c3KMXVwNEU47XHTb1MPNfjAy1', 'faundez.joaquin@gmail.com','Joaquin', 'Faundez-Flores', '1Y0c3KMXVwNEU47XHTb1MPNfjAy1', '2023-01-01'),
-('wdPtphMQaCbMI01BIX3i0jEm6ec2', 'pels1201@gmail.com', 'Simon', 'Pelletier', 'wdPtphMQaCbMI01BIX3i0jEm6ec2', '2023-01-01'),
-('vndE887ZRTO7ksluA7COWsiitdx1', 'chac0902@usherbrooke.ca', 'Cedric', 'Charron', 'vndE887ZRTO7ksluA7COWsiitdx1', '2023-01-01'),
-('9tZTXXEa3PVuubmVFdw63cFhUVq1', 'jordlepatineur@gmail.com', 'Jordan', 'Choquet', '9tZTXXEa3PVuubmVFdw63cFhUVq1', '2023-01-01'),
-('xNVk48UQ7VXqaPWrgFDqFzd5GGK2', 'degoede.jonathan@gmail.com', 'Jonathan', 'Degeode', 'xNVk48UQ7VXqaPWrgFDqFzd5GGK2', '2023-01-01'),
-('OQ7LomNuqBWvMq14SE8TP6x9NUb2', 'aurora@groupes.usherbrooke.ca', 'Aurora', 'Superuser', 'OQ7LomNuqBWvMq14SE8TP6x9NUb2', '2023-01-01');
+('KU6LhC51L1XNulT52E6jaepsseI2', 'casm1907@usherbrooke.com', 'Marie-Eve', 'Castonguay', 'KU6LhC51L1XNulT52E6jaepsseI2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('JAbUfiAVbuOOKZXUbJ2yqYzsdoN2', 'antoinelaberge16@gmail.com', 'Antoine', 'Laberge', 'JAbUfiAVbuOOKZXUbJ2yqYzsdoN2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('LJQN6QBTWOYz83FC1HgNyi6KYBK2', 'adambeliveau16@gmail.com', 'Adam', 'Beliveau', 'LJQN6QBTWOYz83FC1HgNyi6KYBK2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('1Y0c3KMXVwNEU47XHTb1MPNfjAy1', 'faundez.joaquin@gmail.com','Joaquin', 'Faundez-Flores', '1Y0c3KMXVwNEU47XHTb1MPNfjAy1', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('wdPtphMQaCbMI01BIX3i0jEm6ec2', 'pels1201@gmail.com', 'Simon', 'Pelletier', 'wdPtphMQaCbMI01BIX3i0jEm6ec2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('vndE887ZRTO7ksluA7COWsiitdx1', 'chac0902@usherbrooke.ca', 'Cedric', 'Charron', 'vndE887ZRTO7ksluA7COWsiitdx1', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('9tZTXXEa3PVuubmVFdw63cFhUVq1', 'jordlepatineur@gmail.com', 'Jordan', 'Choquet', '9tZTXXEa3PVuubmVFdw63cFhUVq1', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H X2', '514-123-1234'),
+('xNVk48UQ7VXqaPWrgFDqFzd5GGK2', 'degoede.jonathan@gmail.com', 'Jonathan', 'Degeode', 'xNVk48UQ7VXqaPWrgFDqFzd5GGK2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234'),
+('OQ7LomNuqBWvMq14SE8TP6x9NUb2', 'aurora@groupes.usherbrooke.ca', 'Aurora', 'Superuser', 'OQ7LomNuqBWvMq14SE8TP6x9NUb2', '2023-01-01', '1 Rue de la Rue, VilleVille, QC, Canada, J1H 3X2', '514-123-1234');
 INSERT INTO expense_type (id, name)
 VALUES 
 ('d7185478-7c62-4a7c-9ea9-6677c48d4f51', 'Do not know'),
