@@ -14,6 +14,8 @@ echo -e "${G}fetch and insert postgres secret in env${NC}"
 sed -i "s/DB_USER=.*/DB_USER=$(gcloud secrets versions access 2 --secret=postgres_user)/" .env
 sed -i "s/DB_SUPERUSER_PASSWORD=.*/DB_SUPERUSER_PASSWORD=$(gcloud secrets versions access 1 --secret=postgres_password)/" .env
 sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$(gcloud secrets versions access 2 --secret=postgres_password)/" .env
+sed -t "s/EMAIL_USERNAME=.*/EMAIL_USERNAME=$(gcloud secrets versions access 1 --secret=email_username)/" .env
+sed -t "s/EMAIL_PASSWORD=.*/EMAIL_PASSWORD=$(gcloud secrets versions access 1 --secret=email_password)/" .env
 echo -e "${G}fetch and insert coinmarketcap secret in env${NC}"
 sed -i "s/COINMARKETCAP_API_KEY=.*/COINMARKETCAP_API_KEY=$(gcloud secrets versions access 1 --secret=coinmarketcap_api_key)/" .env
 echo -e "${G}setup NGINX port${NC}"
