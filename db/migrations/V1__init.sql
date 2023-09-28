@@ -1,3 +1,5 @@
+-- create tables
+
 CREATE TABLE activity(
     "id" UUID PRIMARY KEY,
     "name" VARCHAR(255) NOT NULL,
@@ -105,13 +107,16 @@ CREATE TABLE mileage(
     "description" VARCHAR(255)
 );
 CREATE TABLE transaction(
-    "id" UUID PRIMARY KEY, 
+    "id" VARCHAR(255) NOT NULL PRIMARY KEY, 
     "to" VARCHAR(255) NOT NULL,
     "from" VARCHAR(255) NOT NULL,
     "amount" VARCHAR(255) NOT NULL,
-    "timesheet_id" VARCHAR(255) NOT NULL,
+    "item_id" UUID NOT NULL,
+    "item_type" VARCHAR(255) NOT NULL,
     "email_sent" BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+-- inject data
 
 INSERT INTO activity ( id, name, is_rd_admissible )
 VALUES
@@ -252,6 +257,8 @@ VALUES
 ('a47a287f-2e6c-4699-a3e1-70b0c712cee7','2e77b4d7-1be8-41a7-ae16-c3999d2a151f', 'no comments', '9tZTXXEa3PVuubmVFdw63cFhUVq1', CURRENT_TIMESTAMP, 'f2f071e8-95bf-11ed-a1eb-0242ac120002', TRUE),
 ('a47a287f-2e6c-4699-a3e1-70b0c712cee8','2d13b44d-6998-4235-9ceb-93ef73dc04a8', 'no comments', 'xNVk48UQ7VXqaPWrgFDqFzd5GGK2', CURRENT_TIMESTAMP, 'f2f071e8-95bf-11ed-a1eb-0242ac120002', TRUE),
 ('a47a287f-2e6c-4699-a3e1-70b0c712cee9','1304012f-5c4b-494b-97e1-4b26d0dc87f3', 'no comments', 'OQ7LomNuqBWvMq14SE8TP6x9NUb2', CURRENT_TIMESTAMP, 'f2f071e8-95bf-11ed-a1eb-0242ac120002', TRUE);
+
+-- create roles and grant permissions
 
 CREATE GROUP readonly_group;
 
