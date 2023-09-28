@@ -23,8 +23,20 @@ services:
       - POSTGRES_PASSWORD=${DB_SUPERUSER_PASSWORD}
     ports:
       - "${DB_PORT}:5432"
-    # volumes:
-    #   - /var/postgres-data:/var/lib/postgresql/data
+    volumes:
+      - /var/postgres-data:/var/lib/postgresql/data
+
+  flyway:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./db/migrations:/flyway/sql
+    depends_on:
+      - postgres
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://postgres:${DB_PORT}/postgres
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=${DB_SUPERUSER_PASSWORD}
 
   git-activity-fetcher:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
