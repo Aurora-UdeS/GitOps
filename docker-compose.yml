@@ -37,6 +37,7 @@ services:
       - FLYWAY_URL=jdbc:postgresql://postgres:${DB_PORT}/postgres
       - FLYWAY_USER=postgres
       - FLYWAY_PASSWORD=${DB_SUPERUSER_PASSWORD}
+      - FLYWAY_BASELINE_ON_MIGRATE=true
 
   git-activity-fetcher:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/git-activity-fetcher:${GIT_ACTIVITY_FETCHER_TAG}
