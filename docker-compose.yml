@@ -32,7 +32,7 @@ services:
     volumes:
       - ./db/migrations:/flyway/sql
     depends_on:
-      - postgres
+      - dockerized-db
     environment:
       - FLYWAY_URL=jdbc:postgresql://postgres:${DB_PORT}/postgres
       - FLYWAY_USER=postgres
