@@ -29,7 +29,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Updated container tag to ${{ github.sha }}"
+          git commit --allow-empty -m "Updated container tag to ${{ github.sha }}"
           git push
   deploy_to_linux_vm:
     name: 'Deploy to linux vm'
@@ -55,5 +55,5 @@ jobs:
           gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
       - name: 'Deploy to Linux VM'
         run: |
-          gcloud compute ssh --zone "us-west4-b" "runner@main" --command "cd ~/GitOps && ./deploy.sh dev" -- -t
+          gcloud compute ssh --zone "northamerica-northeast1-a" "runner@main" --command "cd ~/GitOps && ./deploy.sh dev" -- -t
   
