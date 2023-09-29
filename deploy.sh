@@ -6,7 +6,7 @@ NC='\033[0m'
 echo -e "${G}pulling latest changes${NC}"
 git pull
 echo -e "${G}fetching adminsdk credentials${NC}"
-gcloud secrets versions access 1 --secret=adminsdk_secret_key > credentials.json
+gcloud secrets versions access 3 --secret=adminsdk_secret_key > credentials.json
 echo -e "${G}fetch and insert github client id/secret in env${NC}"
 sed -i "s/GITHUB_CLIENT_ID=.*/GITHUB_CLIENT_ID=$(gcloud secrets versions access 1 --secret=github_client_id)/" .env
 sed -i "s/GITHUB_CLIENT_SECRET=.*/GITHUB_CLIENT_SECRET=$(gcloud secrets versions access 1 --secret=github_client_secret)/" .env
