@@ -27,7 +27,9 @@ CREATE TABLE employee(
     "email" VARCHAR(255) NOT NULL,
     "is_active" BOOLEAN NOT NULL DEFAULT TRUE,
     "reports_to" VARCHAR(255) NOT NULL,
-    "start_date" DATE NOT NULL
+    "start_date" DATE NOT NULL,
+    "phone" VARCHAR(255) NOT NULL DEFAULT '',
+    "address" VARCHAR(255) NOT NULL DEFAULT ''
 );
 CREATE TABLE expense_type(
     "id" UUID PRIMARY KEY,
