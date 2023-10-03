@@ -106,7 +106,7 @@ CREATE TABLE mileage(
     "qty" INTEGER NOT NULL,
     "date" DATE NOT NULL,
     "report_id" UUID NOT NULL,
-    "description" VARCHAR(255)
+    "description" VARCHAR(1023) NOT NULL
 );
 CREATE TABLE transaction(
     "id" VARCHAR(255) NOT NULL PRIMARY KEY, 
