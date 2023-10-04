@@ -39,4 +39,4 @@ echo -e "${G}stopping docker compose${NC}"
 docker compose down
 echo -e "${G}deploying new docker compose version${NC}"
 docker compose up -d --build
-
+cleanup
