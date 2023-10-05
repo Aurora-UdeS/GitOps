@@ -5,5 +5,5 @@ esbuild.build({
   outfile: 'app.cjs',
   bundle: true,
   platform: 'node',
-  package: 'external',
+  packages: 'external',
 }).catch(() => process.exit(1));
