@@ -15,7 +15,7 @@ on:
 jobs:
   update_container_tag:
     name: 'update container tag'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout
@@ -33,7 +33,7 @@ jobs:
           git push
   deploy_to_linux_vm:
     name: 'Deploy to linux vm'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: update_container_tag
     permissions:
       contents: 'read'
