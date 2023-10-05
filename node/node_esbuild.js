@@ -1,9 +1,5 @@
 import esbuild from 'esbuild';
-
-
-
-const esbuild = require('esbuild');
-const fs = require('fs');
+import fs from 'fs';
 
 // Define the path to Helvetica.afm for the current service
 const helveticaAfmPath = './node_modules/pdfkit/js/data/Helvetica.afm';
