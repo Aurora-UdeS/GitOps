@@ -5,4 +5,4 @@ FROM node:16 AS build
 WORKDIR /usr/src
 COPY --from=service . .
 RUN npm install --only=production
-RUN ["node", "app.js"]
+CMD ["node", "app.js"]
