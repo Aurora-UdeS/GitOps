@@ -11,5 +11,4 @@ FROM alpine as runtime
 WORKDIR /usr/src
 RUN apk add libstdc++ gcompat
 COPY --from=build /usr/src/build/app .
-COPY --from=build /usr/src/node_modules ./node_modules
 CMD ["./app"]
