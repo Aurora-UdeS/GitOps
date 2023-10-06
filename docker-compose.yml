@@ -119,6 +119,8 @@ services:
       - CORS_WHITELIST=${CORS_WHITELIST}
       - TIMESHEET_HOST=${TIMESHEET_HOST}
       - EXPENSES_HOST=${EXPENSES_HOST}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
   
   adminsdk:
     image: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk:${ADMINSDK_TAG}
