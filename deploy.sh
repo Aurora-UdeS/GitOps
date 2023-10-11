@@ -8,15 +8,15 @@ function cleanup() {
     rm -rf credentials.json
     echo -e "${G}clean env${NC}"
     git checkout -- .env
-    exit 1
+    exit $1
 }
 
 echo -e "${G}pulling latest changes${NC}"
 git pull
 echo -e "${G}fetching adminsdk credentials${NC}"
-gcloud secrets versions access 3 --secret=adminsdk_secret_key > credentials.json
+sudo gcloud secrets versions access 3 --secret=adminsdk_secret_key --out-file=credentials.json
 
-trap cleanup SIGINT SIGTERM
+trap "cleanup 1" SIGINT SIGTERM
 
 echo -e "${G}fetch and insert github client id/secret in env${NC}"
 sed -i "s/GITHUB_CLIENT_ID=.*/GITHUB_CLIENT_ID=$(gcloud secrets versions access 1 --secret=github_client_id)/" .env
@@ -39,4 +39,4 @@ echo -e "${G}stopping docker compose${NC}"
 docker compose down
 echo -e "${G}deploying new docker compose version${NC}"
 docker compose up -d --build
-cleanup
+cleanup 0
