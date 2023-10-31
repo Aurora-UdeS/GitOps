@@ -1,1 +1,1 @@
-ALTER TABLE mileage ADD mileage_picture_url VARCHAR(255) NOT NULL DEFAULT '';
+ALTER TABLE mileage ADD COLUMN mileage_picture_url VARCHAR(255) NOT NULL DEFAULT '';
