@@ -47,3 +47,4 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}_${{ github.sha }}
           path: /tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
+          retention-days: 1
