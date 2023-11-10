@@ -28,6 +28,16 @@ jobs:
         with:
           path: service
 
+      - name: 'Authenticating to GCP' 
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+          service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
+          
+      - name: 'Setup docker login'
+        run: | 
+          gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -40,11 +50,4 @@ jobs:
             service=service
             gitops=gitops/${{ inputs.SERVICE_LANGUAGE }}
           tags: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/${{ github.event.repository.name }}:${{ github.sha }}
-          outputs: type=docker,dest=/tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ github.event.repository.name }}_${{ github.sha }}
-          path: /tmp/${{ github.event.repository.name }}_${{ github.sha }}.tar
-          retention-days: 1
+          push: true
