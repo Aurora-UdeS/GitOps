@@ -143,6 +143,8 @@ services:
     ports:
       - "3005:3005"
     environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
       - CORS_WHITELIST=${CORS_WHITELIST}
       - EMAIL_USERNAME=${EMAIL_USERNAME}
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
