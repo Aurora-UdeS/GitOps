@@ -1,0 +1,1 @@
+GRANT SELECT ON km_rate TO readonly_group;
