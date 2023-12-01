@@ -1,0 +1,28 @@
+name: "Clean MegaGenial Database"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  database-cleanup:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: 'read'
+        id-token: 'write'
+  
+      env:
+        PGPASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+  
+        - name: GCP Auth
+          uses: google-github-actions/auth@v1
+          with:
+            workload_identity_provider: projects/781206613588/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+            service_account: gitops-service-account@aurora-377318.iam.gserviceaccount.com
+  
+        - name: 'Clean Database'
+          run: |
+            gcloud compute ssh --zone "northamerica-northeast1-a" "runner@main" --command "cd ~/GitOps &&  export PGPASSWORD=\"$PGPASSWORD\" && psql -h localhost -U postgres -d postgres -f ./sql/clean_megag.sql" -- -t
