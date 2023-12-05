@@ -1,8 +1,10 @@
 service:
-  name: payments
-  port: 3005
+  name: timesheet
+  port: 3003
   image:
-    name: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments
-    tag: 7fb260d0755884fba8be5ef8ce0fcc946464e95c
+    name: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/timesheet
+    tag: 60501d2d0b40bdf6ec1e4ef42e89103977b8899a
   namespace: dev
-  replicas: 1
+  replicas: 
+    max: 10
+    min: 1
