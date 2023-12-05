@@ -1,0 +1,8 @@
+service:
+  name: payments
+  port: 3005
+  image:
+    name: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/payments
+    tag: 7fb260d0755884fba8be5ef8ce0fcc946464e95c
+  namespace: dev
+  replicas: 1

@@ -1,0 +1,10 @@
+global:
+  postgresql:
+    auth:
+      postgresPassword: "postgres"
+
+volumePermissions:
+  enabled: true
+primary:
+  initdb:
+    scriptsConfigMap: init-postgres

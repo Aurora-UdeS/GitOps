@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.name }}
+  namespace: {{ .Values.service.namespace }}
+spec:
+  replicas: {{ .Values.service.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+    spec:
+      containers:
+      - name: {{ .Values.service.name }}
+        image: "{{ .Values.service.image.name }}:{{ .Values.service.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        envFrom:
+        - configMapRef:
+            name: aurora-cm
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 2
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 2
+          timeoutSeconds: 2
