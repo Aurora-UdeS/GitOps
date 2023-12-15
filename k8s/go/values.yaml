@@ -1,8 +1,0 @@
-service:
-  name: adminsdk
-  port: 8010
-  image:
-    name: northamerica-northeast1-docker.pkg.dev/aurora-377318/main-registry/adminsdk
-    tag: d5a3986e64b9bc8d7e5e13cb5069301d98214044
-  namespace: dev
-  replicas: 1
