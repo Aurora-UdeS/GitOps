@@ -24,27 +24,30 @@ gcloud secrets versions access 1 --secret=gitops-ssh-secret-key
 
 ### Add workflow yml to your repo
 ```yml
-name: '<<repo name>> pipeline'
+name: "expenses pipeline"
 
 on:
   push:
 
 jobs:
-  build-docker:
-    uses: Aurora-UdeS/GitOps/.github/workflows/buildDocker.yml@main
+  test:
+    uses: Aurora-UdeS/GitOps/.github/workflows/test.yml@main
+  buildAndPushDocker:
+    needs: test
+    uses: Aurora-UdeS/GitOps/.github/workflows/buildPushDocker.yml@main
+    with:
+      SERVICE_LANGUAGE: node
+    secrets:
+      GITOPS_PRIVATE_SSH_KEY: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
 
-  push-docker:
-    needs: build-docker
-    uses: Aurora-UdeS/GitOps/.github/workflows/pushDocker.yml@main
-    
   deploy:
     if: github.ref_name == 'main'
-    needs: push-docker
+    needs: buildAndPushDocker
     uses: Aurora-UdeS/GitOps/.github/workflows/deploy.yml@main
     secrets:
       GITOPS_PRIVATE_SSH_KEY: ${{ secrets.GITOPS_PRIVATE_SSH_KEY }}
     with:
-      SERVICE_NAME: <<REPO_NAME_WITH_UNDERSCORE>>
+      SERVICE_NAME: EXPENSES
 ```
 
 ## How to use docker compose

@@ -15,7 +15,7 @@ echo -e "${G}pulling latest changes${NC}"
 git pull
 echo -e "${G}fetching adminsdk credentials${NC}"
 touch credentials.json
-sudo gcloud secrets versions access 3 --secret=adminsdk_secret_key --out-file=credentials.json
+gcloud secrets versions access 3 --secret=adminsdk_secret_key --out-file=credentials.json
 
 trap "cleanup 1" SIGINT SIGTERM
 
